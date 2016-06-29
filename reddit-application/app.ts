@@ -91,7 +91,7 @@ class Article {
 			       <button (click) = "addArticle(newLink, newTitle)" class="ui positive right floated button"> Submit link </button>
 			   </form>
 			   <div class="ui grid posts">
-			       <reddit-article *ngFor="let article of articles" [article]="article"></reddit-article>
+			       <reddit-article *ngFor="let article of sortedArticles()" [article]="article"></reddit-article>
 			   </div>`
  })
 
@@ -101,9 +101,14 @@ class RedditApp {
 		this.articles = [new Article(1, 'MongoDB', 'http://mongodb.io'), new Article(3, 'AngularJS', 'http://angularjs.org'),
 		                 new Article(5, 'Java', 'http://oracle.com')];
 	}
+	sortedArticles() : Article[] {
+		return this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
+	}
    addArticle(link: HTMLInputElement, title: HTMLInputElement) : void {
       console.log(`Adding title ${title.value} and link ${link.value}`);
       this.articles.push(new Article(0, title.value, link.value));
+      title.value = '';
+      link.value = '';
    }
 }
 bootstrap(RedditApp);
