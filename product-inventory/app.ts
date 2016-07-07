@@ -3,12 +3,52 @@
 
 
 @Component({
+	selector : 'product-image',
+	inputs : ['product'],
+	host: {class: 'ui small image'},
+	template : `<img class="product-image"
+				[src] = "product.imgageUrl">`
+})
+
+class ProductImage {
+	product : Product;
+}
+
+@Component({
+	selector : 'product-row',
+	inputs : ['product'],
+	host: {'class': 'item'},
+	directives : [ProductImage],
+	template : `
+				<product-image [product]="product"></product-image>
+				<div class='content'>
+					<div class='header'>
+						{{product.name}}
+					</div>
+					<div class='meta'>
+						<div class='product-sku'>SKU # {{product.sku}}</div> 
+					</div>
+	            </div>`
+})
+
+class ProductRow {
+	product: Product;
+}
+
+
+@Component({
 	selector : 'products-list',
+	directives : [ProductRow],
 	inputs : ['productsList'],
 	outputs : ['onProductSelected'],
-	template : `<div *ngFor="let myProduct of productsList">
-	                {{myProduct.name}}
-	            </div>`
+	template : `<div class="ui items">
+	                <product-row 
+	                 *ngFor="let myProduct of productsList" 
+	                 [product]="myProduct"
+	                 (click)="productSelected(myProduct)">
+	                </product-row>
+	            </div>
+               `
 })
 
 class ProductsList {
@@ -20,7 +60,7 @@ class ProductsList {
 		this.onProductSelected = new EventEmitter();
 	}
 	productSelected(product: Product) : void {
-		onProductSelected.emit(product);
+		this.onProductSelected.emit(product);
 	}
 
 }
@@ -66,7 +106,7 @@ class Product {
 	constructor(
 		public sku: string,
 		public name: string,
-		public imgaeUrl: string,
+		public imgageUrl: string,
 		public department : string[],
 		public price: number
 	){}
