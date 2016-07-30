@@ -2,6 +2,13 @@
  import { Component } from "@angular/core";
 
 
+/*
+ * Components
+ */
+import {ChatNavBar} from './components/ChatNavBar';
+// import {ChatThreads} from './components/ChatThreads';
+// import {ChatWindow} from './components/ChatWindow';
+
 @Component({
   selector: 'chat-app',
   template: `
