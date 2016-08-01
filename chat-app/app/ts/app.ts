@@ -1,20 +1,18 @@
- import { bootstrap } from "@angular/platform-browser-dynamic";
- import { Component } from "@angular/core";
+ import { bootstrap } from '@angular/platform-browser-dynamic';
+ import { Component } from '@angular/core';
 
-
-/*
- * Components
- */
-import {ChatNavBar} from './components/ChatNavBar';
-// import {ChatThreads} from './components/ChatThreads';
-// import {ChatWindow} from './components/ChatWindow';
-
+ import {ChatNavBar} from './components/ChatNavBar';
+ import {ChatThreads} from './components/ChatThreads';
+ 
 @Component({
   selector: 'chat-app',
+  directives : [ChatNavBar, ChatThreads],
   template: `
-<div>
-This is chat app.
-</div>
+	<div>
+	This is chat app.
+	<chat-nav-bar></chat-nav-bar>
+	<chat-threads></chat-threads>
+	</div>
   `
 })
 class ChatApp {

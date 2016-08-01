@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'chat-nav-bar',
+  selector: 'chat-threads',
   template: `
 	<div>
-		This is chat nav bar.
+		Chat threads to go here.
 	</div>
   `
 })
-export class ChatNavBar {
+export class ChatThreads {
 }
