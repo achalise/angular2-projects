@@ -3,15 +3,17 @@
 
  import {ChatNavBar} from './components/ChatNavBar';
  import {ChatThreads} from './components/ChatThreads';
+ import {ChatWindow} from './components/ChatWindow';
  
 @Component({
   selector: 'chat-app',
-  directives : [ChatNavBar, ChatThreads],
+  directives : [ChatNavBar, ChatThreads, ChatWindow],
   template: `
 	<div>
 	This is chat app.
 	<chat-nav-bar></chat-nav-bar>
 	<chat-threads></chat-threads>
+	<chat-window></chat-window>
 	</div>
   `
 })
