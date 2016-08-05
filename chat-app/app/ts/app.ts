@@ -5,6 +5,13 @@
  import {ChatThreads} from './components/ChatThreads';
  import {ChatWindow} from './components/ChatWindow';
  
+/*
+ * Injectables
+ */
+//import { servicesInjectables } from './services/services';
+ 
+import {threadsServiceInjectables} from './services/ThreadsService';
+
  /*
  * Webpack
  */
@@ -26,4 +33,4 @@ require('../css/styles.scss');
 class ChatApp {
 }
 
-bootstrap(ChatApp);
+bootstrap(ChatApp, [threadsServiceInjectables]);
