@@ -10,10 +10,11 @@
   directives : [ChatNavBar, ChatThreads, ChatWindow],
   template: `
 	<div>
-	This is chat app.
-	<chat-nav-bar></chat-nav-bar>
-	<chat-threads></chat-threads>
-	<chat-window></chat-window>
+		<chat-nav-bar></chat-nav-bar>
+		<div class='container'>
+			<chat-threads></chat-threads>
+			<chat-window></chat-window>	
+		</div>
 	</div>
   `
 })
