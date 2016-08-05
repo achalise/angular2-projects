@@ -8,8 +8,8 @@ import {Component, OnInit} from '@angular/core';
       <div class="navbar-header">
         <a class="navbar-brand" href="https://ng-book.com/2">
           <img src=""/>
-           ng-book 2
-        </a>{{unreadMessagesCount}}
+           Chat Demo
+        </a>
       </div>
       <p class="navbar-text navbar-right">
         <button class="btn btn-primary" type="button">

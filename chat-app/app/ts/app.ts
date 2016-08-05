@@ -5,6 +5,11 @@
  import {ChatThreads} from './components/ChatThreads';
  import {ChatWindow} from './components/ChatWindow';
  
+ /*
+ * Webpack
+ */
+require('../css/styles.scss');
+
 @Component({
   selector: 'chat-app',
   directives : [ChatNavBar, ChatThreads, ChatWindow],
