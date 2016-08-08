@@ -10,8 +10,16 @@
  */
 //import { servicesInjectables } from './services/services';
  
+import {messageServiceInjectables} from './services/MessageService';
 import {threadsServiceInjectables} from './services/ThreadsService';
+import {userServiceInjectables} from './services/UserService';
 
+import {MessageService} from './services/MessageService';
+import {ThreadsService} from './services/ThreadsService';
+import {UserService} from './services/UserService';
+
+import {ExampleData} from './ExampleData';
+import {User} from './models/User';
  /*
  * Webpack
  */
@@ -31,6 +39,9 @@ require('../css/styles.scss');
   `
 })
 class ChatApp {
+	constructor(public messageService: MessageService, public threadsService: ThreadsService, public userService: UserService){
+		ExampleData.init(threadsService, messageService, userService);
+	}
 }
 
-bootstrap(ChatApp, [threadsServiceInjectables]);
+bootstrap(ChatApp, [threadsServiceInjectables, messageServiceInjectables, userServiceInjectables]);

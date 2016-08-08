@@ -9,7 +9,7 @@ export class Thread {
   constructor(id?: string,
               name?: string,
               avatarSrc?: string) {
-    this.id = id;
+    this.id = id || '10' + Math.random();
     this.name = name;
     this.avatarSrc = avatarSrc;
   }
