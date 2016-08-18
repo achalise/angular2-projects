@@ -2,7 +2,7 @@ import {Injectable, bind} from '@angular/core';
 import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import * as _ from 'underscore';
 
-
+import {User} from '../models/User';
 import {Message} from '../models/Message';
 import {Thread} from '../models/Thread';
 import {ThreadsService} from './ThreadsService';
@@ -68,6 +68,15 @@ export class MessageService{
         ///console.log('Adding message', message);
 	    this.newMessages.next(message);		
 	}
+	  messagesForThreadUser(thread: Thread, user: User): Observable<Message> {
+	    return this.newMessages
+	      .filter((message: Message) => {
+	               // belongs to this thread
+	        return (message.thread.id === thread.id) &&
+	               // and isn't authored by this user
+	               (message.author.id !== user.id);
+	      });
+	  }	
 }
 
 export var messageServiceInjectables: Array<any> = [

@@ -59,5 +59,65 @@ export class ExampleData {
        messageService.messages.subscribe(() => ({}));		
        initialMessages.map( (message: Message) => messageService.addMessage(message) );
        userService.setCurrentUser(me);
+       this.setupBots(messageService);
 	}
+  static setupBots(messagesService: MessageService): void {
+
+    // echo bot
+    messagesService.messagesForThreadUser(tEcho, echo)
+      .forEach( (message: Message): void => {
+        messagesService.addMessage(
+          new Message({
+            author: echo,
+            text: message.text,
+            thread: tEcho
+          })
+        );
+      },
+                null);
+
+
+    // reverse bot
+    messagesService.messagesForThreadUser(tRev, rev)
+      .forEach( (message: Message): void => {
+        messagesService.addMessage(
+          new Message({
+            author: rev,
+            text: message.text.split('').reverse().join(''),
+            thread: tRev
+          })
+        );
+      },
+                null);
+
+    // waiting bot
+    messagesService.messagesForThreadUser(tWait, wait)
+      .forEach( (message: Message): void => {
+
+        let waitTime: number = parseInt(message.text, 10);
+        let reply: string;
+
+        if (isNaN(waitTime)) {
+          waitTime = 0;
+          reply = `I didn\'t understand ${message}. Try sending me a number`;
+        } else {
+          reply = `I waited ${waitTime} seconds to send you this.`;
+        }
+
+        setTimeout(
+          () => {
+            messagesService.addMessage(
+              new Message({
+                author: wait,
+                text: reply,
+                thread: tWait
+              })
+            );
+          },
+          waitTime * 1000);
+      },
+                null);
+
+
+  }  
 }
